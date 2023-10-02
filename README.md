@@ -6,11 +6,10 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+This project is a work with the first team conducted in the Sniper Factory Flutter training course.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+It was written for the purpose of producing mbti tests in flutter, and the main language is dart.
+We implemented the algorithm based on the paper below.
+http://www.lrjj.cn/
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Below is a screenshot of the completed result.
