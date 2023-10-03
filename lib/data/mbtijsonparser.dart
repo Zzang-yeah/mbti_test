@@ -14,11 +14,25 @@ class Question {
 });
 
   factory Question.fromJson(Map<String, dynamic>json)=>Question(
-    question: json["qustion"],
+    question: json["question"],
     answerA: json["answerA"],
     answerB: json["answerB"],
     emooji: json["emooji"],
   );
+
+  String getQuestion(){
+    //?? : 앞의 변수가 null일 경우 뒤의 것으로 대체한다
+     return question??"";
+  }
+  String getAnswerA(){
+    return answerA??"";
+  }
+  String getAnswerB(){
+    return answerB??"";
+  }
+  String getEmooji(){
+    return emooji??"";
+  }
 }
 
 class Mbti{
@@ -45,14 +59,12 @@ class Mbti{
   );
 }
 
-
-
 //1~70번까지, mbti 16가지 전부 불러오기
 class MbtiTest {
   //questions:list[Question(1번부터 70번까지 넣을 예정)]
-  final List<Question>? questions;
+  List<Question>? questions;
   //mbtis:dict[String,Mbti(16가지 타입 넣을 예정)]
-  final Map<String, Mbti>? mbtis;
+  Map<String, Mbti>? mbtis;
   //MbtiTest 클래스는 questions,mbtis라는 변수를 갖는다
   //==MbtiTest({List<Question>,Map<String,Mbti>})
   MbtiTest({this.questions, this.mbtis});
@@ -75,7 +87,6 @@ class MbtiTest {
       mbtis[key]=Mbti.fromJson(value);
     });
 
-    //python zzang
-    
+    return MbtiTest(questions: questions, mbtis: mbtis);
   }
 }
