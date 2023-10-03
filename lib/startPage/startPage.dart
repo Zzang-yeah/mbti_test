@@ -5,6 +5,38 @@ class startPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RichText(
+              text: TextSpan(
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(text: '당신의 '),
+                  TextSpan(text: 'MBTI', style: TextStyle(color: Colors.blue)),
+                  TextSpan(text: '는?'),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            Text(
+              '내 엠비티아이는 뭘까?\n간단한 테스트를 통해 알아보자!',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 36,
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(minimumSize: Size(280, 48)),
+                onPressed: () {},
+                child: Text('시작하기'))
+          ],
+        ),
+      ),
+    );
   }
 }
