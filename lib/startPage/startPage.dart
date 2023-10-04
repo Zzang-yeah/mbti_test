@@ -32,14 +32,25 @@ class startPage extends StatelessWidget {
               height: 36,
             ),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(280, 48)),
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.black,
+                    fixedSize: Size(360, 66)),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: ((context) => QuestionPage())));
                 },
-                child: Text('시작하기'))
+                child: Text(
+                  '시작하기',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 24),
+                ))
           ],
         ),
       ),
