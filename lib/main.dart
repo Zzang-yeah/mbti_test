@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: const startPage(title: 'Flutter Demo Home Page'),
-      home: const QuestionPage(),
+      home: const startPage(),
     );
   }
 }

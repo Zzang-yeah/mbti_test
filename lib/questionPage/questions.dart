@@ -9,21 +9,19 @@ class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key});
 
   @override
-  State<QuestionPage> createState() =>
-      _QuestionPageState();
+  State<QuestionPage> createState() => _QuestionPageState();
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-
   final AsyncMemoizer uibefore = AsyncMemoizer();
   Mbtiscore mbtiscore = Mbtiscore();
   MbtiTest mbtijson = MbtiTest();
   double index = 0;
   int maxindex = 1;
 
-  Future<dynamic> beforeui(){
+  Future<dynamic> beforeui() {
     //Mbti.json파일을 불러오기
-    return this.uibefore.runOnce(() async{
+    return this.uibefore.runOnce(() async {
       //then : 해당 함수가 종료가 되었을 때 매개변수로 들어온 함수를 실행
       return await rootBundle.loadString('assets/mbti.json').then((value) {
         mbtijson = MbtiTest.fromJson(value);
@@ -45,6 +43,7 @@ class _QuestionPageState extends State<QuestionPage> {
   //   }
   // }
 
+=======
   void Submit(){
     if ((index+1)==maxindex){
       Navigator.of(context).push(
@@ -55,104 +54,164 @@ class _QuestionPageState extends State<QuestionPage> {
             Mbti mainMbti = mbtijson.mbtis![mbtiscore.getMbti()]!;
             //todo 설명하기+밑의 주석 풀기
             return resultpage(mainMbti,mbtiscore);
+                //return Spacer();
           })
       );
     }
     else{
+
       setState(() {
         index++;
       });
     }
   }
 
+  bool onHoverAcolor = false;
+  bool onHoverBcolor = false;
   @override
   Widget build(BuildContext context) {
-    return
-      FutureBuilder(
-          future: beforeui(),
-          builder: (context,snapshot){
-            switch (snapshot.connectionState){
-              //로딩중일때
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return Spacer();
-              default:
-                return Padding(padding: EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Column(
-                      children: [
-                        //프로그레스 바
-                        LinearProgressIndicator(
-                          value: (index+1)/maxindex,
-                          backgroundColor : Colors.grey,
-                          valueColor : new AlwaysStoppedAnimation<Color> (Colors.blueAccent),
-                          semanticsLabel: 'Linear progress indicator',
-                        ),
-                        Text("<${index+1}/$maxindex>",
-                            style: TextStyle(color:Colors.black)),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.string(mbtijson.questions![index.toInt()].getEmooji()),
-                        Text(mbtijson.questions![index.toInt()].getQuestion(),
-                            style: TextStyle(color:Colors.black)),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        ElevatedButton(onPressed: (){
-                          int mod=(index.toInt()+1)%7;
-                          if (mod==1){
-                            mbtiscore.scoreE++;
-                          }
-                          else if (mod==2 || mod==3){
-                            mbtiscore.scoreS++;
-                          }
-                          else if (mod==4 || mod==5){
-                            mbtiscore.scoreT++;
-                          }
-                          else{
-                            mbtiscore.scoreJ++;
-                          }
-                          Submit();
-                        },
-                          child:Text(mbtijson.questions![index.toInt()].getAnswerA()),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.blueAccent,
+    return FutureBuilder(
+        future: beforeui(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            //로딩중일때
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return Spacer();
+            default:
+              return Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(
+                        children: [
+                          //프로그레스 바
+                          LinearProgressIndicator(
+                            value: (index + 1) / maxindex,
+                            backgroundColor: Colors.grey,
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                Colors.blueAccent),
+                            semanticsLabel: 'Linear progress indicator',
                           ),
-                        ),
-                        ElevatedButton(onPressed: (){
-                          int mod=(index.toInt()+1)%7;
-                          if (mod==1){
-                            mbtiscore.scoreI++;
-                          }
-                          else if (mod==2 || mod==3){
-                            mbtiscore.scoreN++;
-                          }
-                          else if (mod==4 || mod==5){
-                            mbtiscore.scoreF++;
-                          }
-                          else{
-                            mbtiscore.scoreP++;
-                          }
-                          Submit();
-                        },
-                          child:Text(mbtijson.questions![index.toInt()].getAnswerB()),
-                          style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.blueAccent,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("< ${index + 1}/$maxindex >",
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.black,
+                                    fontSize: 12)),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-                );
-            }
-      });
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          // SvgPicture.string(
+                          //     mbtijson.questions![index.toInt()].getEmooji()),
+                          Text(mbtijson.questions![index.toInt()].getQuestion(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  color: Colors.black,
+                                  fontSize: 20)),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            onHover: (value) {
+                              onHoverAcolor = !onHoverAcolor;
+                              setState(() {});
+                            },
+                            onPressed: () {
+                              int mod = (index.toInt() + 1) % 7;
+                              if (mod == 1) {
+                                mbtiscore.scoreE++;
+                              } else if (mod == 2 || mod == 3) {
+                                mbtiscore.scoreS++;
+                              } else if (mod == 4 || mod == 5) {
+                                mbtiscore.scoreT++;
+                              } else {
+                                mbtiscore.scoreJ++;
+                              }
+                              Submit();
+                            },
+                            child: Text(
+                              'A. ' +
+                                  mbtijson.questions![index.toInt()]
+                                      .getAnswerA(),
+                              style: TextStyle(
+                                  color: onHoverAcolor
+                                      ? Colors.blue
+                                      : Colors.black,
+                                  fontWeight:
+                                      onHoverAcolor ? FontWeight.bold : null),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                  color: onHoverAcolor
+                                      ? Colors.blue
+                                      : Colors.black,
+                                  width: onHoverAcolor ? 5 : 0.3),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              fixedSize: Size(360, 66),
+                              onPrimary: Colors.blueAccent,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+                            child: ElevatedButton(
+                              onHover: (v) {
+                                onHoverBcolor = !onHoverBcolor;
+                                setState(() {});
+                              },
+                              onPressed: () {
+                                int mod = (index.toInt() + 1) % 7;
+                                if (mod == 1) {
+                                  mbtiscore.scoreE++;
+                                } else if (mod == 2 || mod == 3) {
+                                  mbtiscore.scoreS++;
+                                } else if (mod == 4 || mod == 5) {
+                                  mbtiscore.scoreT++;
+                                } else {
+                                  mbtiscore.scoreJ++;
+                                }
+                                Submit();
+                              },
+                              child: Text(
+                                'B. ' +
+                                    mbtijson.questions![index.toInt()]
+                                        .getAnswerB(),
+                                style: TextStyle(
+                                    color: onHoverBcolor
+                                        ? Colors.blue
+                                        : Colors.black,
+                                    fontWeight:
+                                        onHoverBcolor ? FontWeight.bold : null),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                side: BorderSide(
+                                    color: onHoverBcolor
+                                        ? Colors.blue
+                                        : Colors.black,
+                                    width: onHoverBcolor ? 5 : 0.3),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                fixedSize: Size(360, 66),
+                                onPrimary: Colors.blueAccent,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ));
+          }
+        });
   }
 }
-
