@@ -1,42 +1,19 @@
 import 'package:flutter/material.dart';
 
 class startPage extends StatelessWidget {
-  const startPage({super.key});
+  const startPage({super.key, required String title});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            RichText(
-              text: TextSpan(
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                children: [
-                  TextSpan(text: '당신의 '),
-                  TextSpan(text: 'MBTI', style: TextStyle(color: Colors.blue)),
-                  TextSpan(text: '는?'),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Text(
-              '내 엠비티아이는 뭘까?\n간단한 테스트를 통해 알아보자!',
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 36,
-            ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(280, 48)),
-                onPressed: () {},
-                child: Text('시작하기'))
-          ],
-        ),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: const startPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
