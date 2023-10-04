@@ -60,6 +60,8 @@ class _QuestionPageState extends State<QuestionPage> {
     }
   }
 
+  bool onHoverAcolor = false;
+  bool onHoverBcolor = false;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -87,25 +89,35 @@ class _QuestionPageState extends State<QuestionPage> {
                                 Colors.blueAccent),
                             semanticsLabel: 'Linear progress indicator',
                           ),
-                          Text("<${index + 1}/$maxindex>",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 24)),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("< ${index + 1}/$maxindex >",
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.black,
+                                    fontSize: 12)),
+                          ),
                         ],
                       ),
                       Column(
                         children: [
-                          // //  SvgPicture.string(
+                          // SvgPicture.string(
                           //     mbtijson.questions![index.toInt()].getEmooji()),
                           Text(mbtijson.questions![index.toInt()].getQuestion(),
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 42,
-                              )),
+                                  decoration: TextDecoration.none,
+                                  color: Colors.black,
+                                  fontSize: 20)),
                         ],
                       ),
                       Column(
                         children: [
                           ElevatedButton(
+                            onHover: (value) {
+                              onHoverAcolor = !onHoverAcolor;
+                              setState(() {});
+                            },
                             onPressed: () {
                               int mod = (index.toInt() + 1) % 7;
                               if (mod == 1) {
@@ -119,30 +131,74 @@ class _QuestionPageState extends State<QuestionPage> {
                               }
                               Submit();
                             },
-                            child: Text(mbtijson.questions![index.toInt()]
-                                .getAnswerA()),
+                            child: Text(
+                              'A. ' +
+                                  mbtijson.questions![index.toInt()]
+                                      .getAnswerA(),
+                              style: TextStyle(
+                                  color: onHoverAcolor
+                                      ? Colors.blue
+                                      : Colors.black,
+                                  fontWeight:
+                                      onHoverAcolor ? FontWeight.bold : null),
+                            ),
                             style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                  color: onHoverAcolor
+                                      ? Colors.blue
+                                      : Colors.black,
+                                  width: onHoverAcolor ? 5 : 0.3),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              fixedSize: Size(360, 66),
                               onPrimary: Colors.blueAccent,
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              int mod = (index.toInt() + 1) % 7;
-                              if (mod == 1) {
-                                mbtiscore.scoreI++;
-                              } else if (mod == 2 || mod == 3) {
-                                mbtiscore.scoreN++;
-                              } else if (mod == 4 || mod == 5) {
-                                mbtiscore.scoreF++;
-                              } else {
-                                mbtiscore.scoreP++;
-                              }
-                              Submit();
-                            },
-                            child: Text(mbtijson.questions![index.toInt()]
-                                .getAnswerB()),
-                            style: ElevatedButton.styleFrom(
-                              onPrimary: Colors.blueAccent,
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+                            child: ElevatedButton(
+                              onHover: (v) {
+                                onHoverBcolor = !onHoverBcolor;
+                                setState(() {});
+                              },
+                              onPressed: () {
+                                int mod = (index.toInt() + 1) % 7;
+                                if (mod == 1) {
+                                  mbtiscore.scoreE++;
+                                } else if (mod == 2 || mod == 3) {
+                                  mbtiscore.scoreS++;
+                                } else if (mod == 4 || mod == 5) {
+                                  mbtiscore.scoreT++;
+                                } else {
+                                  mbtiscore.scoreJ++;
+                                }
+                                Submit();
+                              },
+                              child: Text(
+                                'B. ' +
+                                    mbtijson.questions![index.toInt()]
+                                        .getAnswerB(),
+                                style: TextStyle(
+                                    color: onHoverBcolor
+                                        ? Colors.blue
+                                        : Colors.black,
+                                    fontWeight:
+                                        onHoverBcolor ? FontWeight.bold : null),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                side: BorderSide(
+                                    color: onHoverBcolor
+                                        ? Colors.blue
+                                        : Colors.black,
+                                    width: onHoverBcolor ? 5 : 0.3),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                fixedSize: Size(360, 66),
+                                onPrimary: Colors.blueAccent,
+                              ),
                             ),
                           ),
                         ],
