@@ -39,14 +39,14 @@ class Mbti{
   String? title;
   String? content;
   String? strength;
-  String? wealsol;
+  String? weaksol;
   String? imooji;
 
   Mbti({
     this.title,
     this.content,
     this.strength,
-    this.wealsol,
+    this.weaksol,
     this.imooji,
 });
 
@@ -54,7 +54,7 @@ class Mbti{
     title: json["title"],
     content: json["content"],
     strength: json["strength"],
-    wealsol: json['weeksol'],
+    weaksol: json['weaksol'],
     imooji: json['imooji'],
   );
 }

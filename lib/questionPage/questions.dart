@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mbti_test/data/mbtijsonparser.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mbti_test/data/mbtiscore.dart';
+import 'package:mbti_test/resultPage/resultpage.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key});
@@ -52,7 +53,7 @@ class _QuestionPageState extends State<QuestionPage> {
             //mbtiTest.mbtis[mainmbti]=>MBTI클래스+mbtiscore(mainmbti+etcmbti)
             Mbti mainMbti = mbtijson.mbtis![mbtiscore.getMbti()]!;
             //todo 설명하기+밑의 주석 풀기
-            return resultpage(mainMbti,mbtiscore);
+            return ResultPage(mbtiName: mbtiscore.getMbti(),mbti : mainMbti, score : mbtiscore);
                 //return Spacer();
           })
       );
@@ -78,7 +79,9 @@ class _QuestionPageState extends State<QuestionPage> {
             case ConnectionState.waiting:
               return Spacer();
             default:
-              return Padding(
+              return Scaffold(
+          backgroundColor: Colors.white,
+          body: Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,9 +108,8 @@ class _QuestionPageState extends State<QuestionPage> {
                         ],
                       ),
                       Column(
-                        children: [
-                          // SvgPicture.string(
-                          //     mbtijson.questions![index.toInt()].getEmooji()),
+                        children: [SvgPicture.string(
+                               mbtijson.questions![index.toInt()].getEmooji()),
                           Text(mbtijson.questions![index.toInt()].getQuestion(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -209,7 +211,8 @@ class _QuestionPageState extends State<QuestionPage> {
                         ],
                       )
                     ],
-                  ));
+                  ))
+              );
           }
         });
   }

@@ -7,6 +7,7 @@ class startPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -15,9 +16,9 @@ class startPage extends StatelessWidget {
               text: TextSpan(
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 children: [
-                  TextSpan(text: '당신의 '),
+                  TextSpan(text: '당신의 ',style: TextStyle(color: Colors.black)),
                   TextSpan(text: 'MBTI', style: TextStyle(color: Colors.blue)),
-                  TextSpan(text: '는?'),
+                  TextSpan(text: '는?',style: TextStyle(color: Colors.black)),
                 ],
               ),
             ),
