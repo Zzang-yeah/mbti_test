@@ -43,7 +43,6 @@ class _QuestionPageState extends State<QuestionPage> {
   //   }
   // }
 
-=======
   void Submit(){
     if ((index+1)==maxindex){
       Navigator.of(context).push(
