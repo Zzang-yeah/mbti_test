@@ -43,17 +43,23 @@ class _QuestionPageState extends State<QuestionPage> {
   //   }
   // }
 
-  void Submit() {
-    if ((index + 1) == maxindex) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        //resultpage의 생성자에 매개변수로 mbti class를 받음
-        //mbtiTest.mbtis[mainmbti]=>MBTI클래스+mbtiscore(mainmbti+etcmbti)
-        Mbti mainMbti = mbtijson.mbtis![mbtiscore.getMbti()]!;
-        //todo 설명하기+밑의 주석 풀기
-        //return resultpage(mainMbti,mbtiscore);
-        return Spacer();
-      }));
-    } else {
+=======
+  void Submit(){
+    if ((index+1)==maxindex){
+      Navigator.of(context).push(
+          MaterialPageRoute(builder:
+              (context){
+            //resultpage의 생성자에 매개변수로 mbti class를 받음
+            //mbtiTest.mbtis[mainmbti]=>MBTI클래스+mbtiscore(mainmbti+etcmbti)
+            Mbti mainMbti = mbtijson.mbtis![mbtiscore.getMbti()]!;
+            //todo 설명하기+밑의 주석 풀기
+            return resultpage(mainMbti,mbtiscore);
+                //return Spacer();
+          })
+      );
+    }
+    else{
+
       setState(() {
         index++;
       });
