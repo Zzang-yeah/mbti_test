@@ -88,15 +88,19 @@ class _QuestionPageState extends State<QuestionPage> {
                             semanticsLabel: 'Linear progress indicator',
                           ),
                           Text("<${index + 1}/$maxindex>",
-                              style: TextStyle(color: Colors.black)),
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 24)),
                         ],
                       ),
                       Column(
                         children: [
-                          SvgPicture.string(
-                              mbtijson.questions![index.toInt()].getEmooji()),
+                          // //  SvgPicture.string(
+                          //     mbtijson.questions![index.toInt()].getEmooji()),
                           Text(mbtijson.questions![index.toInt()].getQuestion(),
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 42,
+                              )),
                         ],
                       ),
                       Column(
