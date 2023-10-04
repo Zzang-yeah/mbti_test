@@ -54,10 +54,8 @@ class _QuestionPageState extends State<QuestionPage> {
             //mbtiTest.mbtis[mainmbti]=>MBTI클래스+mbtiscore(mainmbti+etcmbti)
             Mbti mainMbti = mbtijson.mbtis![mbtiscore.getMbti()]!;
             //todo 설명하기+밑의 주석 풀기
-            //return resultpage(mainMbti,mbtiscore);
-                return Spacer();
-          }
-          )
+            return resultpage(mainMbti,mbtiscore);
+          })
       );
     }
     else{
