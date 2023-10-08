@@ -27,6 +27,7 @@ Everyone
 
 This project is only incomplete with the emoticon from the last MBTI test. If you go to assets/mbti.json and add the emoticon svg file (format: <svg>~~~</svg>) you want for each mbti, it will work perfectly.
 Please send code questions here: cat7892@naver.com (Yeji Han)
+한글버전 readme.md는 여기로->https://zzangyeah.tistory.com/208
 
 Below is a screenshot of the completed result.
 
